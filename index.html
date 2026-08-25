@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1440, initial-scale=1" />
+<title>WORLD / TIME — Editorial World Clock</title>
+<meta name="description" content="An experimental editorial world clock. Desktop only." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+  rel="stylesheet"
+/>
+<link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <section id="first-screen" class="screen screen--first" aria-label="World city selector">
+
+    <!-- decorative concentric rings, centered on the invisible rotation axis -->
+    <div class="rings" aria-hidden="true">
+      <span class="ring ring--a"></span>
+      <span class="ring ring--b"></span>
+    </div>
+
+    <!-- typographic city composition — populated + animated by composition.js -->
+    <div id="composition" class="composition"></div>
+
+    <!-- editorial frame furniture -->
+    <div class="frame-ui" aria-hidden="true">
+      <span class="frame-ui__item frame-ui__item--tl">
+        <em>WORLD&nbsp;/&nbsp;TIME</em>
+      </span>
+      <span class="frame-ui__item frame-ui__item--tr">
+        SCROLL&nbsp;TO&nbsp;ROTATE
+      </span>
+      <span class="frame-ui__item frame-ui__item--bl">
+        EDITORIAL&nbsp;ATLAS — 2026
+      </span>
+      <span class="frame-ui__item frame-ui__item--br">
+        <span id="rotation-readout">000°</span>&nbsp;/&nbsp;DESKTOP&nbsp;ONLY
+      </span>
+    </div>
+
+  </section>
+
+  <!-- SECOND SCREEN — city detail. Data-driven per city (see
+       js/second-screen.js) — every city in cities.js navigates here now.
+       Hidden until a city:select fires. -->
+  <section id="second-screen" class="screen screen--second" aria-label="City detail" hidden>
+    <div class="detail">
+      <div class="detail__info" id="detail-info">
+        <div class="detail__flagchip" id="detail-flagchip" aria-hidden="true"></div>
+        <header class="detail__header">
+          <p class="detail__eyebrow" id="detail-eyebrow">—</p>
+          <p class="detail__subtitle" id="detail-subtitle">—</p>
+        </header>
+        <div class="detail__stack" id="detail-stack">
+          <span class="detail__line" id="detail-weekday">—</span>
+          <span class="detail__line" id="detail-date">—</span>
+          <span class="detail__line" id="detail-city">—</span>
+          <span class="detail__line" id="detail-temp">—°C, —°F</span>
+          <span class="detail__line" id="detail-weather">—</span>
+        </div>
+      </div>
+      <div class="detail__clockstage" id="detail-clockstage">
+        <!-- generated, abstract monotone graphic — a different motif per
+             city (see CITYSCAPE_BUILDERS in second-screen.js), matching
+             that city's visualConcept. Used until/unless a real photo is
+             dropped in at the path already in cities.js — see #detail-photo. -->
+        <svg
+          class="detail__cityscape"
+          id="detail-cityscape"
+          aria-hidden="true"
+          viewBox="0 0 800 1000"
+          preserveAspectRatio="xMidYMax slice"
+        ></svg>
+        <img
+          class="detail__photo"
+          id="detail-photo"
+          alt=""
+          aria-hidden="true"
+        />
+        <div class="detail__clock" id="detail-clock"></div>
+      </div>
+    </div>
+    <button type="button" class="detail__back js-cursor-hover" id="detail-back">← ALL CITIES</button>
+  </section>
+
+</div>
+
+<div id="custom-cursor" class="custom-cursor" aria-hidden="true"></div>
+
+<script src="./js/data/cities.js"></script>
+<script src="./js/utils.js"></script>
+<script src="./js/cursor.js"></script>
+<script src="./js/composition.js"></script>
+<script src="./js/main.js"></script>
+<script src="./js/second-screen.js"></script>
+</body>
+</html>
